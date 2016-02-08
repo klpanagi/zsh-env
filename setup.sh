@@ -16,7 +16,7 @@ zsh --version || \
 # Change default shell to use zsh
 chsh -s $(which zsh)
 
-sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+sh -c "$(wget https://raw.github.com/klpanagi/oh-my-zsh/master/tools/install.sh -O -)"
 
 cd "${HOME}/.oh-my-zsh/custom/themes"
 wget ${BulletTrainUrl}
