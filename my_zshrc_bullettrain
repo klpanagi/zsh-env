@@ -73,7 +73,7 @@ ZSH_CUSTOM=~/.oh-my-zsh/custom
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-syntax-highlighting themes lol python cp colored-man-pages)
-plugins+=(command-not-found)
+plugins+=(command-not-found ssh-agent)
 #convenient aliases for using the history commandsad
 plugins+=(history)
 # json tools
