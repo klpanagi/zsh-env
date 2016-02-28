@@ -173,4 +173,8 @@ alias gitc='git clone'
 # ROS
 source /opt/ros/indigo/setup.zsh --extend
 
-
+# RAPP-Platform
+if [ -d "${HOME}/rapp_platform" ]; then
+  echo "RAPP Platform located in system"
+  source ${HOME}/rapp_platform/rapp_platform_setup.zsh
+fi
