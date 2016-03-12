@@ -1,11 +1,12 @@
 #!/bin/bash
 
-currentDir=$(pwd)
+currentDir=`pwd`
+echo currentDir
 BulletTrainUrl="https://raw.githubusercontent.com/caiogondim/bullet-train-oh-my-zsh-theme/master/bullet-train.zsh-theme"
 powerlevel9k_url="git@github.com:bhilburn/powerlevel9k.git"
 
 # Install zsh
-sudo apt-get install zsh
+#sudo apt-get install zsh
 
 zsh --version || \
   {
@@ -14,13 +15,14 @@ zsh --version || \
   }
 
 # Change default shell to use zsh
-chsh -s $(which zsh)
+#chsh -s $(which zsh)
 
-sh -c "$(wget https://raw.github.com/klpanagi/oh-my-zsh/master/tools/install.sh -O -)"
+#sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 
+mkdir -p "${HOME}/.oh-my-zsh/custom/themes"
 cd "${HOME}/.oh-my-zsh/custom/themes"
 wget ${BulletTrainUrl}
 git clone $powerlevel9k_url
 
 rm "${HOME}/.zshrc"
-cp "${currentDir}/my_zshrc" ~/.zshrc
+ln -s "${currentDir}/my_zshrc" ~/.zshrc
