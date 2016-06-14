@@ -44,7 +44,7 @@ ZSH_THEME="bullet-train"
 #DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -78,7 +78,8 @@ plugins+=(tmux)
 plugins+=(urltools)
 # User configuration
 plugins+=(zsh-syntax-highlighting)
-plugins+=(vm)
+plugins+=(zsh-completions)
+plugins+=(zsh-autosuggestions)
 
 # export MANPATH="/usr/local/man:$MANPATH"
 

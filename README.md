@@ -25,7 +25,8 @@ wget https://raw.githubusercontent.com/caiogondim/bullet-train-oh-my-zsh-theme/m
 
 #### Step 6: Plugins
 
-- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
-
+- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
+- [zsh-completions](https://github.com/zsh-users/zsh-completions)
+- [zsh-autosuggestions]()
 
 :goberserk
