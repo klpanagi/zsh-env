@@ -11,10 +11,6 @@ My zsh environment setup and configuration
 sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 ```
 
-#### Step 3: Install [zsh-completions]()
-
-#### Step 4: Install [zsh-syntax-highlighting]()
-
 #### Step 5: Fetch Bullettrain theme:
 
 ```bash
