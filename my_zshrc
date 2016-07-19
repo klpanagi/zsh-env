@@ -76,10 +76,12 @@ plugins+=(jsontools)
 plugins+=(tmux)
 # url encode/decode tool aliases (urlencode, urldecode)
 plugins+=(urltools)
+plugins+=(ssh-agent)
 # User configuration
 plugins+=(zsh-syntax-highlighting)
 plugins+=(zsh-completions)
 plugins+=(zsh-autosuggestions)
+plugins+=(vi-mode)
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -174,3 +176,12 @@ if [ -d "${HOME}/rapp_platform" ]; then
   echo "RAPP Platform located in system"
   source ${HOME}/rapp_platform/rapp_platform_setup.zsh
 fi
+
+bindkey "${terminfo[khome]}" beginning-of-line
+bindkey "${terminfo[kend]}" end-of-line
+bindkey "e[1~" beginning-of-line
+bindkey "e[4~" end-of-line
+bindkey  "^[[1~"   beginning-of-line
+bindkey  "^[[4~"   end-of-line
+
+bindkey -v
