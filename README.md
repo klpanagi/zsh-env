@@ -5,6 +5,12 @@ My zsh environment setup and configuration
 
 #### Step 1: Install zsh shell
 
+
+#### Step 2: Install Antigen - Plugin manager for zsh
+
+- Ubuntu: `sudo apt-get install zsh-antigen`
+- Arch: `sudo yaourt -S antigen-git`
+
 #### Step 2: Install [oh-my-zsh]()
 
 ```bash
