@@ -11,24 +11,4 @@ My zsh environment setup and configuration
 - Ubuntu: `sudo apt-get install zsh-antigen`
 - Arch: `sudo yaourt -S antigen-git`
 
-#### Step 2: Install [oh-my-zsh]()
-
-```bash
-sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-```
-
-#### Step 5: Fetch Bullettrain theme:
-
-```bash
-mkdir -p "${HOME}/.oh-my-zsh/custom/themes"
-cd "${HOME}/.oh-my-zsh/custom/themes"
-wget https://raw.githubusercontent.com/caiogondim/bullet-train-oh-my-zsh-theme/master/bullet-train.zsh-theme
-```
-
-#### Step 6: Plugins
-
-- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
-- [zsh-completions](https://github.com/zsh-users/zsh-completions)
-- [zsh-autosuggestions]()
-
-:goberserk
+:goberserk:
