@@ -20,6 +20,13 @@ antigen use oh-my-zsh
 
 ## Theme {
   antigen theme https://github.com/caiogondim/bullet-train-oh-my-zsh-theme bullet-train
+  #antigen theme russjohnson/angry-fly-zsh angry-fly
+  #antigen theme denysdovhan/spaceship-zsh-theme spaceship
+  #antigen bundle yardnsm/blox-zsh-theme
+  #antigen theme InAnimaTe/darkblood-modular darkblood-modular
+  #antigen theme oskarkrawczyk/honukai-iterm-zsh honukai
+  #antigen theme tonyseek/oh-my-zsh-seeker-theme seeker
+
 #}
 
 # Tell antigen that you're done.
@@ -116,7 +123,7 @@ fi
 ####################
 # Prompt
 BULLETTRAIN_PROMPT_ROOT=true
-BULLETTRAIN_PROMPT_CHAR=""
+BULLETTRAIN_PROMPT_CHAR="➔"
 BULLETTRAIN_PROMPT_SEPARATE_LINE=true
 BULLETTRAIN_PROMPT_ADD_NEWLINE=true
 
@@ -131,16 +138,15 @@ BULLETTRAIN_STATUS_ERROR_BG="red"
 BULLETTRAIN_STATUS_FG="black"
 
 # Context
-BULLETTRAIN_CONTEXT_SHOW=true
-BULLETTRAIN_CONTEXT_DEFAULT_USER=false
 BULLETTRAIN_IS_SSH_CLIENT=true
 BULLETTRAIN_CONTEXT_BG="black"
 BULLETTRAIN_CONTEXT_FG="yellow"
+BULLETTRAIN_CONTEXT_DEFAULT_USER="klpanagi"
 
 # Dir
 BULLETTRAIN_DIR_SHOW=true
-BULLETTRAIN_DIR_BG="blue"
-BULLETTRAIN_DIR_FG="white"
+BULLETTRAIN_DIR_BG="black"
+BULLETTRAIN_DIR_FG="yellow"
 BULLETTRAIN_DIR_CONTEXT_SHOW=false
 BULLETTRAIN_DIR_EXTENDED=1
 
@@ -150,12 +156,13 @@ BULLETTRAIN_GIT_BG="black"
 BULLETTRAIN_GIT_FG="white"
 BULLETTRAIN_GIT_COLORIZE_DIRTY=true
 BULLETTRAIN_GIT_COLORIZE_DIRTY_BG_COLOR="black"
-BULLETTRAIN_GIT_COLORIZE_DIRTY_FG_COLOR="white"
+BULLETTRAIN_GIT_COLORIZE_DIRTY_FG_COLOR="cyan"
 
 # Command execution
 BULLETTRAIN_EXEC_TIME_SHOW=true
-BULLETTRAIN_EXEC_TIME_BG="yellow"
-BULLETTRAIN_EXEC_TIME_FG="black"
+BULLETTRAIN_EXEC_TIME_BG="magenta"
+BULLETTRAIN_EXEC_TIME_FG="white"
+BULLETTRAIN_EXEC_TIME_ELAPSED=2
 
 ### TMUX ###
 ############
@@ -172,7 +179,9 @@ alias gitc='git clone'
 
 
 # ROS
-source /opt/ros/indigo/setup.zsh --extend
+if [ -d "/opt/ros/indigo" ]; then
+  source /opt/ros/indigo/setup.zsh --extend
+fi
 
 # RAPP-Platform
 if [ -d "${HOME}/rapp_platform" ]; then
