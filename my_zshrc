@@ -9,7 +9,7 @@ antigen use oh-my-zsh
   antigen bundle git
   antigen bundle colorize
   antigen bundle pip
-  antigen bundle emoji
+  #antigen bundle emoji
   antigen bundle colored-man-pages
   antigen bundle zsh-users/zsh-syntax-highlighting
   antigen bundle zsh-users/zsh-completions
@@ -164,6 +164,13 @@ BULLETTRAIN_EXEC_TIME_BG="magenta"
 BULLETTRAIN_EXEC_TIME_FG="white"
 BULLETTRAIN_EXEC_TIME_ELAPSED=2
 
+# Python virtualenv
+BULLETTRAIN_VIRTUALENV_SHOW=true
+BULLETTRAIN_VIRTUALENV_BG="yellow"
+BULLETTRAIN_VIRTUALENV_FG="black"
+BULLETTRAIN_VIRTUALENV_PREFIX="[pyenv]"
+
+
 ### TMUX ###
 ############
 ZSH_TMUX_AUTOSTART=false
@@ -192,4 +199,7 @@ fi
 # vim-mode
 #bindkey -v
 
-export PYTHONPATH=$PYTHONPATH:${HOME}/Thesis/dnn/cnn
+## Python VirtualEnv
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/bin/virtualenvwrapper.sh
+export PYTHONPATH=$PYTHONPATH:${HOME}/Desktop/Diploma-Thesis/ai-playground/deep-learning/lib
