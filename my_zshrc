@@ -9,6 +9,7 @@ antigen use oh-my-zsh
   antigen bundle git
   antigen bundle colorize
   antigen bundle pip
+  antigen bundle cp
   #antigen bundle emoji
   antigen bundle colored-man-pages
   antigen bundle zsh-users/zsh-syntax-highlighting
@@ -203,3 +204,5 @@ fi
 export WORKON_HOME=$HOME/.virtualenvs
 source /usr/bin/virtualenvwrapper.sh
 export PYTHONPATH=$PYTHONPATH:${HOME}/Desktop/Diploma-Thesis/ai-playground/deep-learning/lib
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
