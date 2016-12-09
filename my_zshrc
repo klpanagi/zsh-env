@@ -16,7 +16,11 @@ antigen use oh-my-zsh
   antigen bundle zsh-users/zsh-completions
   antigen bundle zsh-users/zsh-history-substring-search
   antigen bundle zsh-users/zsh-autosuggestions
+
   antigen bundle ssh-agent
+  antigen bundle copydir
+  antigen bundle copyfile
+  antigen bundle supercrabtree/k
 # }
 
 ## Theme {
@@ -28,13 +32,12 @@ antigen use oh-my-zsh
   #antigen theme oskarkrawczyk/honukai-iterm-zsh honukai
   #antigen theme tonyseek/oh-my-zsh-seeker-theme seeker
 
-#}
+# }
 
 # Tell antigen that you're done.
 antigen apply
 
 ## zsh-history-substring-search {
-
   ## OPTION 1: for most systems
   zmodload zsh/terminfo
   bindkey "$terminfo[kcuu1]" history-substring-search-up
@@ -45,11 +48,10 @@ antigen apply
   ## VI mode
   bindkey -M vicmd 'k' history-substring-search-up
   bindkey -M vicmd 'j' history-substring-search-down]]]]
-
 # }
 
 export EDITOR="vim"
-export BROWSER="chromium"
+export BROWSER="firefox"
 
 ## Compiler
 export CC=/usr/bin/gcc
@@ -58,11 +60,11 @@ export CXX=/usr/bin/g++
 # Locale
 export LANG=en_US.UTF-8
 
-export TERM="screen-256color"
+export TERM="xterm-256color"
 export TERMINAL="terminator"
 
 # If not tmux session
-[[ $TMUX = "" ]] && export TERM="rxvt-unicode"
+#[[ $TMUX = "" ]] && export TERM="rxvt-unicode"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -103,6 +105,10 @@ if [ -d "$HOME/.local/bin" ]; then
   PATH="$HOME/.local/bin:$PATH"
 fi
 
+if [ -d "$HOME/.local/lib" ]; then
+  LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"
+fi
+
 
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/local/lib/pkgconfig:/usr/lib/pkgconfig
 
@@ -118,91 +124,96 @@ fi
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+# export SSH_KEY_PATH="~/.ssh/id_rsa"
 
-### Bullet-Train ###
-####################
-# Prompt
-BULLETTRAIN_PROMPT_ROOT=true
-BULLETTRAIN_PROMPT_CHAR="➔"
-BULLETTRAIN_PROMPT_SEPARATE_LINE=true
-BULLETTRAIN_PROMPT_ADD_NEWLINE=true
+## Bullettrain Theme {
+  # Prompt
+  BULLETTRAIN_PROMPT_ROOT=true
+  BULLETTRAIN_PROMPT_CHAR="➔"
+  BULLETTRAIN_PROMPT_SEPARATE_LINE=true
+  BULLETTRAIN_PROMPT_ADD_NEWLINE=true
 
-# Time
-BULLETTRAIN_TIME_SHOW=false
+  # Time
+  BULLETTRAIN_TIME_SHOW=false
 
-# Status
-BULLETTRAIN_STATUS_SHOW=true
-BULLETTRAIN_STATUS_EXIT_SHOW=true
-BULLETTRAIN_STATUS_BG="green"
-BULLETTRAIN_STATUS_ERROR_BG="red"
-BULLETTRAIN_STATUS_FG="black"
+  # Status
+  BULLETTRAIN_STATUS_SHOW=true
+  BULLETTRAIN_STATUS_EXIT_SHOW=true
+  BULLETTRAIN_STATUS_BG="green"
+  BULLETTRAIN_STATUS_ERROR_BG="red"
+  BULLETTRAIN_STATUS_FG="black"
 
-# Context
-BULLETTRAIN_IS_SSH_CLIENT=true
-BULLETTRAIN_CONTEXT_BG="black"
-BULLETTRAIN_CONTEXT_FG="yellow"
-BULLETTRAIN_CONTEXT_DEFAULT_USER="klpanagi"
+  # Context
+  BULLETTRAIN_IS_SSH_CLIENT=true
+  BULLETTRAIN_CONTEXT_BG="black"
+  BULLETTRAIN_CONTEXT_FG="yellow"
+  BULLETTRAIN_CONTEXT_DEFAULT_USER="klpanagi"
 
-# Dir
-BULLETTRAIN_DIR_SHOW=true
-BULLETTRAIN_DIR_BG="black"
-BULLETTRAIN_DIR_FG="yellow"
-BULLETTRAIN_DIR_CONTEXT_SHOW=false
-BULLETTRAIN_DIR_EXTENDED=1
+  # Dir
+  BULLETTRAIN_DIR_SHOW=true
+  BULLETTRAIN_DIR_BG="black"
+  BULLETTRAIN_DIR_FG="yellow"
+  BULLETTRAIN_DIR_CONTEXT_SHOW=false
+  BULLETTRAIN_DIR_EXTENDED=1
 
-# Git
-BULLETTRAIN_GIT_SHOW=true
-BULLETTRAIN_GIT_BG="black"
-BULLETTRAIN_GIT_FG="white"
-BULLETTRAIN_GIT_COLORIZE_DIRTY=true
-BULLETTRAIN_GIT_COLORIZE_DIRTY_BG_COLOR="black"
-BULLETTRAIN_GIT_COLORIZE_DIRTY_FG_COLOR="cyan"
+  # Git
+  BULLETTRAIN_GIT_SHOW=true
+  BULLETTRAIN_GIT_BG="black"
+  BULLETTRAIN_GIT_FG="white"
+  BULLETTRAIN_GIT_COLORIZE_DIRTY=true
+  BULLETTRAIN_GIT_COLORIZE_DIRTY_BG_COLOR="black"
+  BULLETTRAIN_GIT_COLORIZE_DIRTY_FG_COLOR="cyan"
 
-# Command execution
-BULLETTRAIN_EXEC_TIME_SHOW=true
-BULLETTRAIN_EXEC_TIME_BG="magenta"
-BULLETTRAIN_EXEC_TIME_FG="white"
-BULLETTRAIN_EXEC_TIME_ELAPSED=2
+  # Command execution
+  BULLETTRAIN_EXEC_TIME_SHOW=true
+  BULLETTRAIN_EXEC_TIME_BG="magenta"
+  BULLETTRAIN_EXEC_TIME_FG="white"
+  BULLETTRAIN_EXEC_TIME_ELAPSED=2
 
-# Python virtualenv
-BULLETTRAIN_VIRTUALENV_SHOW=true
-BULLETTRAIN_VIRTUALENV_BG="yellow"
-BULLETTRAIN_VIRTUALENV_FG="black"
-BULLETTRAIN_VIRTUALENV_PREFIX="[pyenv]"
+  # Python virtualenv
+  BULLETTRAIN_VIRTUALENV_SHOW=true
+  BULLETTRAIN_VIRTUALENV_BG="yellow"
+  BULLETTRAIN_VIRTUALENV_FG="black"
+  BULLETTRAIN_VIRTUALENV_PREFIX="[pyenv]"
 
+# }
 
-### TMUX ###
-############
-ZSH_TMUX_AUTOSTART=false
-ZSH_TMUX_AUTOCONNECT=true
-ZSH_TMUX_FIXTERM_WITH_256COLOR=true
+### Tmux {
+  ZSH_TMUX_AUTOSTART=false
+  ZSH_TMUX_AUTOCONNECT=true
+  ZSH_TMUX_FIXTERM_WITH_256COLOR=true
+# }
 
-### Aliases ###
-###############
-alias gits='git status'
-alias gitf='git fetch'
-alias gita='git add -A'
-alias gitc='git clone'
+### Aliases {
+  if [ -d "~/.zsh_aliases" ]; then
+    source ~/.zsh_aliases
+  fi
+# }
 
+# ROS {
+  if [ -d "/opt/ros/indigo" ]; then
+    source /opt/ros/indigo/setup.zsh --extend
+  fi
+# }
 
-# ROS
-if [ -d "/opt/ros/indigo" ]; then
-  source /opt/ros/indigo/setup.zsh --extend
-fi
-
-# RAPP-Platform
-if [ -d "${HOME}/rapp_platform" ]; then
-  echo "RAPP Platform located in system"
-  source ${HOME}/rapp_platform/rapp_platform_setup.zsh
-fi
+# RAPP-Platform {
+  if [ -d "${HOME}/rapp_platform" ]; then
+    source ${HOME}/rapp_platform/rapp_platform_setup.zsh
+  fi
+# }
 
 # vim-mode
 #bindkey -v
 
-## Python VirtualEnv
-export WORKON_HOME=$HOME/.virtualenvs
-source /usr/bin/virtualenvwrapper.sh
-export PYTHONPATH=$PYTHONPATH:${HOME}/Desktop/Diploma-Thesis/ai-playground/deep-learning/lib
+## Python VirtualEnv {
+  export WORKON_HOME=$HOME/.virtualenvs
+  source /usr/bin/virtualenvwrapper.sh
+  export PYTHONPATH=$PYTHONPATH:${HOME}/Desktop/Diploma-Thesis/ai-playground/deep-learning/lib
+# }
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+## FZF plugin {
+  #[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+  #export FZF_COMPLETION_TRIGGER='~~' # Trigger Sequence (~~<TAB>)
+  #FZH_TMUX_HEIGHT=40 # Control fzf pane height
+# }
