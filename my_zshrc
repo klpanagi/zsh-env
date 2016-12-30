@@ -220,7 +220,7 @@ fi
 
 
 ## FZF plugin {
-  #[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-  #export FZF_COMPLETION_TRIGGER='~~' # Trigger Sequence (~~<TAB>)
-  #FZH_TMUX_HEIGHT=40 # Control fzf pane height
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+  export FZF_COMPLETION_TRIGGER=',,' # Trigger Sequence (,,<TAB>)
+  FZH_TMUX_HEIGHT=40 # Control fzf pane height
 # }
