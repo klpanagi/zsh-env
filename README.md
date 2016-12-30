@@ -1,5 +1,6 @@
 # zsh-env
 My zsh environment setup and configuration
+:goberserk:
 
 ## Setup
 
@@ -8,7 +9,3 @@ My zsh environment setup and configuration
 
 #### Step 2: Install Antigen - Plugin manager for zsh
 
-- Ubuntu: `sudo apt-get install zsh-antigen`
-- Arch: `sudo yaourt -S antigen-git`
-
-:goberserk:

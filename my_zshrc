@@ -48,7 +48,14 @@ antigen apply
   ## VI mode
   bindkey -M vicmd 'k' history-substring-search-up
   bindkey -M vicmd 'j' history-substring-search-down]]]]
-# }
+## }
+
+## zsh-autosuggestions --{
+
+  bindkey '^ ' autosuggest-execute
+  ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=39"
+
+## --}
 
 export EDITOR="vim"
 export BROWSER="firefox"
