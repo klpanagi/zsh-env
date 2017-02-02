@@ -10,6 +10,7 @@ antigen use oh-my-zsh
   antigen bundle colorize
   antigen bundle pip
   antigen bundle cp
+  antigen-bundle Tarrasch/zsh-autoenv
   #antigen bundle emoji
   antigen bundle colored-man-pages
   antigen bundle zsh-users/zsh-syntax-highlighting
@@ -17,7 +18,7 @@ antigen use oh-my-zsh
   antigen bundle zsh-users/zsh-history-substring-search
   antigen bundle zsh-users/zsh-autosuggestions
 
-  antigen bundle ssh-agent
+  #antigen bundle ssh-agent
   antigen bundle copydir
   antigen bundle copyfile
   antigen bundle supercrabtree/k
@@ -133,6 +134,11 @@ fi
 # ssh
 # export SSH_KEY_PATH="~/.ssh/id_rsa"
 
+AUTOENV_FILE_ENTER=".venv.enter"
+AUTOENV_FILE_LEAVE=".venv.leave"
+AUTOENV_HANDLE_LEAVE=1
+AUTOENV_DEBUG=2
+
 ## Bullettrain Theme {
   # Prompt
   BULLETTRAIN_PROMPT_ROOT=true
@@ -212,11 +218,7 @@ fi
 # vim-mode
 #bindkey -v
 
-## Python VirtualEnv {
-  export WORKON_HOME=$HOME/.virtualenvs
-  source /usr/bin/virtualenvwrapper.sh
   export PYTHONPATH=$PYTHONPATH:${HOME}/Desktop/Diploma-Thesis/ai-playground/deep-learning/lib
-# }
 
 
 ## FZF plugin {
@@ -224,3 +226,6 @@ fi
   export FZF_COMPLETION_TRIGGER=',,' # Trigger Sequence (,,<TAB>)
   FZH_TMUX_HEIGHT=40 # Control fzf pane height
 # }
+export WORKON_HOME=~/.virtuanenvs
+source /usr/local/bin/virtualenvwrapper.sh
+#source /usr/local/bin/activate.sh
