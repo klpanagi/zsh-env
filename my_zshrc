@@ -37,7 +37,6 @@ zplug "caiogondim/bullet-train-oh-my-zsh-theme", \
   #antigen theme InAnimaTe/darkblood-modular darkblood-modular
   #antigen theme oskarkrawczyk/honukai-iterm-zsh honukai
   #antigen theme tonyseek/oh-my-zsh-seeker-theme seeker
-
 # }
 
 if ! zplug check --verbose; then
@@ -50,27 +49,23 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load --verbose
 
+zmodload zsh/terminfo
 ## zsh-history-substring-search {
-  ## OPTION 1: for most systems
-  zmodload zsh/terminfo
-  bindkey "$terminfo[kcuu1]" history-substring-search-up
-  bindkey "$terminfo[kcud1]" history-substring-search-down
-  ## OPTION 1: for Ubuntu 12.04, Fedora 21, and MacOSX 10.9
-  bindkey '^[[A' history-substring-search-up
-  bindkey '^[[B' history-substring-search-down
-  ## VI mode
-  bindkey -M vicmd 'k' history-substring-search-up
-  bindkey -M vicmd 'j' history-substring-search-down]]]]
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+## VI mode
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down]]]]
 ## }
 
 ## zsh-autosuggestions --{
-
-  bindkey '^ ' autosuggest-execute
-  ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=39"
-
+bindkey '^ ' autosuggest-execute
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=39"
 ## --}
 
-export EDITOR="vim"
 export BROWSER="firefox"
 
 ## Compiler
@@ -86,39 +81,15 @@ export TERMINAL="terminator"
 # If not tmux session
 #[[ $TMUX = "" ]] && export TERM="rxvt-unicode"
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
+CASE_SENSITIVE="true"
 # HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
+DISABLE_AUTO_UPDATE="true"
 # export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-#DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
+DISABLE_AUTO_TITLE="true"
 ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="mm/dd/yyyy"
 
 if [ -d "$HOME/.local/bin" ]; then
@@ -129,15 +100,13 @@ if [ -d "$HOME/.local/lib" ]; then
   LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"
 fi
 
-
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/local/lib/pkgconfig:/usr/lib/pkgconfig
-
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+    export EDITOR='vim'
 else
-  export EDITOR='vim'
+    export EDITOR='gvim'
 fi
 
 # Compilation flags
@@ -146,94 +115,91 @@ fi
 # ssh
 # export SSH_KEY_PATH="~/.ssh/id_rsa"
 
-## Bullettrain Theme {
-  BULLETTRAIN_PROMPT_ORDER=(
-    status
-    cmd_exec_time
-    git
-    context
-    dir
-    virtualenv
-  )
+# Bullettrain Theme ----------{
+BULLETTRAIN_PROMPT_ORDER=(
+  status
+  cmd_exec_time
+  git
+  context
+  dir
+  virtualenv
+)
   # Prompt
-  BULLETTRAIN_PROMPT_ROOT=true
-  BULLETTRAIN_PROMPT_CHAR="➔ "
-  BULLETTRAIN_PROMPT_SEPARATE_LINE=true
-  BULLETTRAIN_PROMPT_ADD_NEWLINE=true
+BULLETTRAIN_PROMPT_ROOT=true
+BULLETTRAIN_PROMPT_CHAR="➔ "
+BULLETTRAIN_PROMPT_SEPARATE_LINE=true
+BULLETTRAIN_PROMPT_ADD_NEWLINE=true
 
-  # Status
-  BULLETTRAIN_STATUS_BG="green"
-  BULLETTRAIN_STATUS_ERROR_BG="red"
-  BULLETTRAIN_STATUS_FG="white"
+# Status
+BULLETTRAIN_STATUS_BG="green"
+BULLETTRAIN_STATUS_ERROR_BG="red"
+BULLETTRAIN_STATUS_FG="white"
 
-  # Context
-  BULLETTRAIN_IS_SSH_CLIENT=true
-  BULLETTRAIN_CONTEXT_BG="black"
-  BULLETTRAIN_CONTEXT_FG="yellow"
-  BULLETTRAIN_CONTEXT_DEFAULT_USER="klpanagi"
+# Context
+BULLETTRAIN_IS_SSH_CLIENT=true
+BULLETTRAIN_CONTEXT_BG="black"
+BULLETTRAIN_CONTEXT_FG="yellow"
+BULLETTRAIN_CONTEXT_DEFAULT_USER="klpanagi"
 
-  # Dir
-  BULLETTRAIN_DIR_BG="black"
-  BULLETTRAIN_DIR_FG="yellow"
-  BULLETTRAIN_DIR_CONTEXT_SHOW=false
-  BULLETTRAIN_DIR_EXTENDED=1
+# Dir
+BULLETTRAIN_DIR_BG="black"
+BULLETTRAIN_DIR_FG="yellow"
+BULLETTRAIN_DIR_CONTEXT_SHOW=false
+BULLETTRAIN_DIR_EXTENDED=1
 
-  # Git
-  BULLETTRAIN_GIT_BG="black"
-  BULLETTRAIN_GIT_FG="white"
-  BULLETTRAIN_GIT_COLORIZE_DIRTY=true
-  BULLETTRAIN_GIT_COLORIZE_DIRTY_BG_COLOR="black"
-  BULLETTRAIN_GIT_COLORIZE_DIRTY_FG_COLOR="cyan"
+# Git
+BULLETTRAIN_GIT_BG="black"
+BULLETTRAIN_GIT_FG="white"
+BULLETTRAIN_GIT_COLORIZE_DIRTY=true
+BULLETTRAIN_GIT_COLORIZE_DIRTY_BG_COLOR="black"
+BULLETTRAIN_GIT_COLORIZE_DIRTY_FG_COLOR="cyan"
 
-  # Command execution
-  BULLETTRAIN_EXEC_TIME_BG="blue"
-  BULLETTRAIN_EXEC_TIME_FG="white"
-  BULLETTRAIN_EXEC_TIME_ELAPSED=20
+# Command execution
+BULLETTRAIN_EXEC_TIME_BG="blue"
+BULLETTRAIN_EXEC_TIME_FG="white"
+BULLETTRAIN_EXEC_TIME_ELAPSED=20
 
-  # Python virtualenv
-  BULLETTRAIN_VIRTUALENV_BG="yellow"
-  BULLETTRAIN_VIRTUALENV_FG="black"
-  BULLETTRAIN_VIRTUALENV_PREFIX="pyenv"
-
-# }
+# Python virtualenv
+BULLETTRAIN_VIRTUALENV_BG="yellow"
+BULLETTRAIN_VIRTUALENV_FG="black"
+BULLETTRAIN_VIRTUALENV_PREFIX="pyenv"
+# ----------}
 
 ### Tmux {
-  ZSH_TMUX_AUTOSTART=false
-  ZSH_TMUX_AUTOCONNECT=true
-  ZSH_TMUX_FIXTERM_WITH_256COLOR=true
+ZSH_TMUX_AUTOSTART=false
+ZSH_TMUX_AUTOCONNECT=true
+ZSH_TMUX_FIXTERM_WITH_256COLOR=true
 # }
 
 ### Aliases {
-  if [ -d "~/.zsh_aliases" ]; then
+if [ -d "~/.zsh_aliases" ]; then
     source ~/.zsh_aliases
-  fi
+fi
 # }
 
 # ROS {
-  if [ -d "/opt/ros/indigo" ]; then
+if [ -d "/opt/ros/indigo" ]; then
     source /opt/ros/indigo/setup.zsh --extend
-  fi
+fi
 # }
 
 # RAPP-Platform {
-  if [ -d "${HOME}/rapp_platform" ]; then
+if [ -d "${HOME}/rapp_platform" ]; then
     source ${HOME}/rapp_platform/rapp_platform_setup.zsh
-  fi
+fi
 # }
 
 # vim-mode
 #bindkey -v
 
-## Python VirtualEnv {
-  export PYTHONPATH=$PYTHONPATH:${HOME}/Desktop/Diploma-Thesis/ai-playground/deep-learning/lib
-# }
+# export PYTHONPATH=$PYTHONPATH:${HOME}/Desktop/Diploma-Thesis/ai-playground/deep-learning/lib
 
+## FZF plugin ----------{
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_COMPLETION_TRIGGER=',,' # Trigger Sequence (,,<TAB>)
+FZH_TMUX_HEIGHT=40 # Control fzf pane height
+# ----------}
 
-## FZF plugin {
-  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-  export FZF_COMPLETION_TRIGGER=',,' # Trigger Sequence (,,<TAB>)
-  FZH_TMUX_HEIGHT=40 # Control fzf pane height
-# }
 export WORKON_HOME=~/.virtuanenvs
 source /usr/local/bin/virtualenvwrapper.sh
 source /usr/local/bin/activate.sh
