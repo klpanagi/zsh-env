@@ -148,12 +148,12 @@ fi
 
 ## Bullettrain Theme {
   BULLETTRAIN_PROMPT_ORDER=(
+    status
     cmd_exec_time
     git
     context
     dir
     virtualenv
-    status
   )
   # Prompt
   BULLETTRAIN_PROMPT_ROOT=true
@@ -225,8 +225,6 @@ fi
 #bindkey -v
 
 ## Python VirtualEnv {
-  export WORKON_HOME=$HOME/.virtualenvs
-  source /usr/bin/virtualenvwrapper.sh
   export PYTHONPATH=$PYTHONPATH:${HOME}/Desktop/Diploma-Thesis/ai-playground/deep-learning/lib
 # }
 
