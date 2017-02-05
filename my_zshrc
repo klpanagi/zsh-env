@@ -5,39 +5,34 @@ if [[ ! -d ~/.zplug ]]; then
 fi
 source $HOME/.zplug/init.zsh
 
+#ZPLUG_PROTOCOL="SSH"
+#ZPLUG_USE_CACHE=true
+
 ## Bundles {
-  zplug "plugins/command-not-found", from:oh-my-zsh
-  zplug "plugins/z", from:oh-my-zsh
-  zplug "plugins/git", from:oh-my-zsh
-  zplug "plugins/colorize", from:oh-my-zsh
-  zplug "plugins/pip", from:oh-my-zsh
-  zplug "plugins/cp", from:oh-my-zsh
-  zplug "plugins/colored-man-pages", from:oh-my-zsh
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+zplug "robbyrussell/oh-my-zsh", use:"lib/*.zsh"
+zplug "plugins/command-not-found", from:oh-my-zsh
+zplug "plugins/z", from:oh-my-zsh
+zplug "plugins/git", from:oh-my-zsh
+zplug "plugins/colorize", from:oh-my-zsh
+zplug "plugins/pip", from:oh-my-zsh
+zplug "plugins/cp", from:oh-my-zsh
+zplug "plugins/colored-man-pages", from:oh-my-zsh
 
-  zplug "zsh-users/zsh-syntax-highlighting", defer:2
-  zplug "zsh-users/zsh-completions", defer:2
-  zplug "zsh-users/zsh-history-substring-search", defer:2
-  zplug "zsh-users/zsh-autosuggestions", defer:2
-
-  #antigen bundle ssh-agent
-  zplug "plugins/copydir", from:oh-my-zsh
-  zplug "plugins/copyfile", from:oh-my-zsh
-  zplug "supercrabtree/k", from:oh-my-zsh
+zplug "zsh-users/zsh-completions",              defer:0
+zplug "zsh-users/zsh-autosuggestions",          defer:2, on:"zsh-users/zsh-completions"
+zplug "zsh-users/zsh-syntax-highlighting",      defer:3, on:"zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-history-substring-search", defer:3, on:"zsh-users/zsh-syntax-highlighting"
+zplug "plugins/ssh-agent", from:oh-my-zsh
+zplug "supercrabtree/k"
 # }
 
-## Theme {
+# Theme ----------{
 setopt prompt_subst
-  #zplug "adambiggs/zsh-theme", use:adambiggs.zsh-theme
 zplug "caiogondim/bullet-train-oh-my-zsh-theme", \
     use:"bullet-train.zsh-theme", \
     as:theme
-  #antigen theme russjohnson/angry-fly-zsh angry-fly
-  #antigen theme denysdovhan/spaceship-zsh-theme spaceship
-  #antigen bundle yardnsm/blox-zsh-theme
-  #antigen theme InAnimaTe/darkblood-modular darkblood-modular
-  #antigen theme oskarkrawczyk/honukai-iterm-zsh honukai
-  #antigen theme tonyseek/oh-my-zsh-seeker-theme seeker
-# }
+# ----------}
 
 if ! zplug check --verbose; then
     printf "Install zsh plugin? [y/N]: "
@@ -47,7 +42,7 @@ if ! zplug check --verbose; then
 fi
 
 # Then, source plugins and add commands to $PATH
-zplug load --verbose
+zplug load
 
 zmodload zsh/terminfo
 ## zsh-history-substring-search {
@@ -65,6 +60,17 @@ bindkey -M vicmd 'j' history-substring-search-down]]]]
 bindkey '^ ' autosuggest-execute
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=39"
 ## --}
+
+# ZSH History config ----------{
+setopt append_history
+setopt hist_expire_dups_first
+setopt hist_fcntl_lock
+setopt hist_ignore_all_dups
+setopt hist_lex_words
+setopt hist_reduce_blanks
+setopt hist_save_no_dups
+setopt share_history
+# ----------}
 
 export BROWSER="firefox"
 
@@ -104,9 +110,9 @@ export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/x86_64-linux-gnu/pkgconfig:/usr
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='vim'
-else
     export EDITOR='gvim'
+else
+    export EDITOR='vim'
 fi
 
 # Compilation flags
@@ -119,9 +125,9 @@ fi
 BULLETTRAIN_PROMPT_ORDER=(
   status
   cmd_exec_time
-  git
   context
   dir
+  git
   virtualenv
 )
   # Prompt
@@ -165,17 +171,17 @@ BULLETTRAIN_VIRTUALENV_FG="black"
 BULLETTRAIN_VIRTUALENV_PREFIX="pyenv"
 # ----------}
 
-### Tmux {
+### Tmux ----------{
 ZSH_TMUX_AUTOSTART=false
 ZSH_TMUX_AUTOCONNECT=true
 ZSH_TMUX_FIXTERM_WITH_256COLOR=true
-# }
+# ----------}
 
-### Aliases {
-if [ -d "~/.zsh_aliases" ]; then
+# Aliases ----------{
+if [ -f "${HOME}/.zsh_aliases" ]; then
     source ~/.zsh_aliases
 fi
-# }
+# ----------}
 
 # ROS {
 if [ -d "/opt/ros/indigo" ]; then
@@ -196,7 +202,7 @@ fi
 
 ## FZF plugin ----------{
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_COMPLETION_TRIGGER=',,' # Trigger Sequence (,,<TAB>)
+    export FZF_COMPLETION_TRIGGER=',,' # Trigger Sequence (,,<TAB>)
 FZH_TMUX_HEIGHT=40 # Control fzf pane height
 # ----------}
 
