@@ -25,6 +25,7 @@ zplug "zsh-users/zsh-syntax-highlighting",      defer:3, on:"zsh-users/zsh-autos
 zplug "zsh-users/zsh-history-substring-search", defer:3, on:"zsh-users/zsh-syntax-highlighting"
 zplug "plugins/ssh-agent", from:oh-my-zsh
 zplug "supercrabtree/k"
+zplug "Tarrasch/zsh-autoenv"
 # }
 
 # Theme ----------{
@@ -177,6 +178,12 @@ ZSH_TMUX_AUTOCONNECT=true
 ZSH_TMUX_FIXTERM_WITH_256COLOR=true
 # ----------}
 
+# ZSH-AUTOENV ----------{
+AUTOENV_FILE_ENTER=".venv.enter"
+AUTOENV_FILE_LEAVE=".venv.leave"
+AUTOENV_HANDLE_LEAVE=1
+# ----------}
+
 # Aliases ----------{
 if [ -f "${HOME}/.zsh_aliases" ]; then
     source ~/.zsh_aliases
@@ -208,4 +215,3 @@ FZH_TMUX_HEIGHT=40 # Control fzf pane height
 
 export WORKON_HOME=~/.virtuanenvs
 source /usr/local/bin/virtualenvwrapper.sh
-source /usr/local/bin/activate.sh
