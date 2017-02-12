@@ -213,5 +213,6 @@ fi
 FZH_TMUX_HEIGHT=40 # Control fzf pane height
 # ----------}
 
-export WORKON_HOME=~/.virtuanenvs
-source /usr/local/bin/virtualenvwrapper.sh
+export WORKON_HOME=~/.virtualenvs
+[ -f /usr/bin/virtualenvwrapper.sh ] && source /usr/bin/virtualenvwrapper.sh
+[ -f /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
