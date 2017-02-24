@@ -1,3 +1,5 @@
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/local/lib/pkgconfig:/usr/lib/pkgconfig
+
 # Check if zplug is installed
 if [[ ! -d ~/.zplug ]]; then
     git clone https://github.com/zplug/zplug ~/.zplug
@@ -5,8 +7,8 @@ if [[ ! -d ~/.zplug ]]; then
 fi
 source $HOME/.zplug/init.zsh
 
-#ZPLUG_PROTOCOL="SSH"
-#ZPLUG_USE_CACHE=true
+ZPLUG_PROTOCOL="SSH"
+ZPLUG_USE_CACHE=true
 
 ## Bundles {
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
@@ -30,8 +32,8 @@ zplug "Tarrasch/zsh-autoenv"
 
 # Theme ----------{
 setopt prompt_subst
-zplug "caiogondim/bullet-train-oh-my-zsh-theme", \
-    use:"bullet-train.zsh-theme", \
+zplug "denysdovhan/spaceship-zsh-theme", \
+    use:"spaceship.zsh-theme", \
     as:theme
 # ----------}
 
@@ -51,11 +53,6 @@ bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
-
-## VI mode
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down]]]]
-## }
 
 ## zsh-autosuggestions --{
 bindkey '^ ' autosuggest-execute
@@ -82,11 +79,12 @@ export CXX=/usr/bin/g++
 # Locale
 export LANG=en_US.UTF-8
 
-export TERM="xterm-256color"
 export TERMINAL="terminator"
 
 # If not tmux session
-#[[ $TMUX = "" ]] && export TERM="rxvt-unicode"
+export TERM=xterm-256color
+[ -n "$TMUX" ] && export TERM=screen-256color
+
 
 CASE_SENSITIVE="true"
 # HYPHEN_INSENSITIVE="true"
@@ -107,8 +105,6 @@ if [ -d "$HOME/.local/lib" ]; then
   LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"
 fi
 
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/local/lib/pkgconfig:/usr/lib/pkgconfig
-
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
     export EDITOR='gvim'
@@ -119,70 +115,6 @@ fi
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/id_rsa"
-
-# Bullettrain Theme ----------{
-BULLETTRAIN_PROMPT_ORDER=(
-  status
-  cmd_exec_time
-  context
-  dir
-  git
-  virtualenv
-)
-  # Prompt
-BULLETTRAIN_PROMPT_ROOT=true
-BULLETTRAIN_PROMPT_CHAR="➔ "
-BULLETTRAIN_PROMPT_SEPARATE_LINE=true
-BULLETTRAIN_PROMPT_ADD_NEWLINE=true
-
-# Status
-BULLETTRAIN_STATUS_BG="green"
-BULLETTRAIN_STATUS_ERROR_BG="red"
-BULLETTRAIN_STATUS_FG="white"
-
-# Context
-BULLETTRAIN_IS_SSH_CLIENT=true
-BULLETTRAIN_CONTEXT_BG="black"
-BULLETTRAIN_CONTEXT_FG="yellow"
-BULLETTRAIN_CONTEXT_DEFAULT_USER="klpanagi"
-
-# Dir
-BULLETTRAIN_DIR_BG="black"
-BULLETTRAIN_DIR_FG="yellow"
-BULLETTRAIN_DIR_CONTEXT_SHOW=false
-BULLETTRAIN_DIR_EXTENDED=1
-
-# Git
-BULLETTRAIN_GIT_BG="black"
-BULLETTRAIN_GIT_FG="white"
-BULLETTRAIN_GIT_COLORIZE_DIRTY=true
-BULLETTRAIN_GIT_COLORIZE_DIRTY_BG_COLOR="black"
-BULLETTRAIN_GIT_COLORIZE_DIRTY_FG_COLOR="cyan"
-
-# Command execution
-BULLETTRAIN_EXEC_TIME_BG="blue"
-BULLETTRAIN_EXEC_TIME_FG="white"
-BULLETTRAIN_EXEC_TIME_ELAPSED=20
-
-# Python virtualenv
-BULLETTRAIN_VIRTUALENV_BG="yellow"
-BULLETTRAIN_VIRTUALENV_FG="black"
-BULLETTRAIN_VIRTUALENV_PREFIX="pyenv"
-# ----------}
-
-### Tmux ----------{
-ZSH_TMUX_AUTOSTART=false
-ZSH_TMUX_AUTOCONNECT=true
-ZSH_TMUX_FIXTERM_WITH_256COLOR=true
-# ----------}
-
-# ZSH-AUTOENV ----------{
-AUTOENV_FILE_ENTER=".venv.enter"
-AUTOENV_FILE_LEAVE=".venv.leave"
-AUTOENV_HANDLE_LEAVE=1
-# ----------}
 
 # Aliases ----------{
 if [ -f "${HOME}/.zsh_aliases" ]; then
@@ -202,10 +134,68 @@ if [ -d "${HOME}/rapp_platform" ]; then
 fi
 # }
 
-# vim-mode
-#bindkey -v
-
 # export PYTHONPATH=$PYTHONPATH:${HOME}/Desktop/Diploma-Thesis/ai-playground/deep-learning/lib
+
+export SSH_KEY_PATH="~/.ssh/rsa_id"
+
+# For a full list of active aliases, run `alias`.
+if [[ $(uname -r) == *ARCH* ]]; then
+    alias install="sudo pacman -S"
+    alias upgrade="sudo pacman -Syu"
+    alias remove="sudo pacman -R"
+    alias autoremove="sudo pacman -Rs"
+    alias purge="sudo pacman -Rsc"
+    alias paclog="less /var/log/pacman.log"
+    alias psearch="sudo pacman -Ss"
+    alias porphans="sudo pacman -Qdt"
+    alias paclean="sudo pacman -Sc"
+    else
+    alias install="sudo apt-get install"
+    alias update="sudo apt-get update"
+    alias upgrade="sudo apt-get upgrade"
+    alias remove="sudo apt-get remove"
+fi
+
+# Directory and file listing with tree ---{
+alias tree1="tree -L 1"
+alias tree2="tree -L 2"
+alias tree3="tree -L 3"
+# ---}
+
+# Useful info ---{
+alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias tcp="netstat -antp"
+alias udp="netstat -anup"
+alias findps="ps aux | grep"
+# ---}
+
+# Tmux
+alias tmux="tmux -2"
+
+# Vi-mode settings ----{
+bindkey -v
+bindkey -M viins 'jk' vi-cmd-mode
+bindkey '^R' history-incremental-search-backward
+#bindkey -M vicmd 'k' history-substring-search-up
+#bindkey -M vicmd 'j' history-substring-search-down]]]]
+# ----}
+
+# Terminal colors
+BASE16_SHELL="$HOME/.config/base16-shell/base16-tomorrow.dark.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+
+ctrl-z-restore () {
+    if [[ $#BUFFER -eq 0 ]]; then
+        BUFFER="fg"
+        zle accept-line
+    else
+        zle push-input
+        zle clear-screen
+    fi
+}
+
+zle -N ctrl-z-restore
+bindkey '^Z' ctrl-z-restore
 
 ## FZF plugin ----------{
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
